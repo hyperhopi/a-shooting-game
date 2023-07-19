@@ -24,7 +24,10 @@ public class Player : MonoBehaviour
     void OnCollisionEnter(Collision col)
     {
         Enemy enemy = col.collider.gameObject.GetComponent<Enemy>();
-        collidedWithEnemy(enemy);
+        if (enemy)
+        {
+            collidedWithEnemy(enemy);
+        }
     }
 
     // Update is called once per frame
