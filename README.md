@@ -7,7 +7,9 @@
 
 ### 🥇 example scene
 
-<img src="https://github.com/hyperhopi/a-shooting-game/assets/70691848/18549b5f-3296-4d33-887d-4f70cc8022d5" width="450">
+<img src="https://github.com/hyperhopi/a-shooting-game/assets/70691848/f6ce493c-82a9-4e3e-a990-9a78224fb3dc" width="450">
+
+
 
 > `w` -> up
 > 
