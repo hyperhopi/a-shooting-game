@@ -28,6 +28,10 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             Destroy(this.gameObject);
+            var gameController = GameObject.FindGameObjectWithTag("GameController")
+            .GetComponent<GameController>();
+
+            gameController.OnEnemyDeath();
         }
     }
 

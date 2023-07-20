@@ -1,16 +1,24 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
     public EnemyProducer enemyProducer;
     public GameObject playerPrefab;
 
+    public TMP_Text winText;
+    public TMP_Text countText;
+    public int enemyDeaths;
+
     void Start()
     {
+        enemyDeaths = 0;
         var player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         player.onPlayerDeath += onPlayerDeath;
+        countText.SetText(GetKillCountText());
     }
 
     void onPlayerDeath(Player player)
@@ -21,6 +29,33 @@ public class GameController : MonoBehaviour
         Invoke("restartGame", 3);
     }
 
+    void StopEnemies()
+    {
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (var enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+        var enemyProducer = GameObject.Find("EnemyProducer");
+        Destroy(enemyProducer);
+    }
+
+    public void OnEnemyDeath()
+    {
+        enemyDeaths++;
+        countText.SetText(GetKillCountText());
+        if (enemyDeaths >= 5)
+        {
+            winText.text = "Wow! Hopi Wins!";
+            StopEnemies();
+        }
+    }
+
+    String GetKillCountText()
+    {
+        return "Kill count: " + enemyDeaths;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -28,6 +63,10 @@ public class GameController : MonoBehaviour
     }
     void restartGame()
     {
+        enemyDeaths = 0;
+        winText.text = "";
+        countText.text = "";
+
         var enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (var enemy in enemies)
         {
